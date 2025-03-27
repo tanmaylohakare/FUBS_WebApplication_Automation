@@ -4,7 +4,9 @@ import com.Pages.AddToCart;
 import com.Pages.AddToWishList;
 import com.Pages.LoginPage;
 import com.TestBase.TestBase;
+import com.Util.TestUtil;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -14,6 +16,8 @@ public class WishListTest extends TestBase {
 
     public LoginPage loginPage;
     public AddToWishList wishList;
+    String SheetName= "Sheet1";
+
 
     public WishListTest()
     {
@@ -34,6 +38,22 @@ public class WishListTest extends TestBase {
     public void WishListTest1() throws InterruptedException {
         loginPage.Login(prop.getProperty("email"), prop.getProperty("password"));
         wishList.AddToWishListM();
+    }
+
+    @DataProvider
+    public Object[][] getLoginTestData () {
+        Object data[][] = TestUtil.getTestData(SheetName);
+        return data;
+    }
+    @Test(dataProvider = "getLoginTestData", priority = 2)
+    public void multipleUserLoginTest (String username, String password) throws InterruptedException {
+        loginPage.Login(username, password);
+        wishList.AddToWishListM();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

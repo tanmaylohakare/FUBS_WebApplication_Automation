@@ -2,6 +2,8 @@ package com.TestPages;
 
 import com.Pages.LoginPage;
 import com.TestBase.TestBase;
+import org.apache.log4j.Logger;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +14,7 @@ public class LoginPageTest extends TestBase
 {
     LoginPage loginPage;
 
-
+    Logger log = Logger.getLogger(LoginPageTest.class);
 
     public LoginPageTest() throws FileNotFoundException {
         super();
@@ -26,6 +28,17 @@ public class LoginPageTest extends TestBase
 
     @Test
     public void LoginTest() throws InterruptedException {
+
+
         loginPage.Login(prop.getProperty("email"),prop.getProperty("password"));
+        log.info("Login test executed successfully");
+
+    }
+
+    @AfterMethod
+    public void teardown()
+    {
+        driver.close();
+
     }
 }

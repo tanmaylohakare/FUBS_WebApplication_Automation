@@ -1,10 +1,13 @@
 package com.TestBase;
 
 import com.Util.TestUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,9 +20,15 @@ public class TestBase {
     public static WebDriver driver;
     public Properties prop;
 
+    public static Logger log = LogManager.getLogger(TestBase.class);
+
+
+
+
     public TestBase()
     {
         PageFactory.initElements(driver,this);
+
         try
         {
             prop=new Properties();
@@ -39,6 +48,9 @@ public class TestBase {
 
     public  void initialization()
     {
+
+        PropertyConfigurator.configure("C:\\Users\\91749\\Desktop\\HBN\\GIva_Application_WebAutomation\\src\\test\\java\\resources\\Log4j.properties");
+
         String browserName =prop.getProperty("browser");
 
         if (browserName.equals("chrome"))

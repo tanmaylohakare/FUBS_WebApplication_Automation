@@ -3,6 +3,8 @@ package com.TestPages;
 import com.Pages.AddToCart;
 import com.Pages.LoginPage;
 import com.TestBase.TestBase;
+import org.apache.log4j.Logger;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,6 +15,8 @@ public class AddToCartPageTest extends TestBase {
 
     public LoginPage loginPage;
     public AddToCart addToCart;
+
+    Logger log = Logger.getLogger(AddToCartPageTest.class);
 
     // Constructor to initialize the parent class (TestBase)
     public AddToCartPageTest() {
@@ -33,8 +37,13 @@ public class AddToCartPageTest extends TestBase {
 
     public void AddToCartTest1() throws InterruptedException {
         loginPage.Login(prop.getProperty("email"), prop.getProperty("password"));
-
         addToCart.AddJewellery();
+        log.info("Jewelery Added to Cart Successfully");
+    }
 
+    @AfterMethod
+    public void teardown()
+    {
+        driver.close();
     }
 }

@@ -44,6 +44,8 @@ public class AddToWishList extends TestBase {
         Earingset.click();
         Thread.sleep(1000);
 
+        log.info("Jaipuri Jewelery Added to WishList Successfully");
+
         driver.navigate().back();
         Thread.sleep(2000);
 
@@ -55,6 +57,8 @@ public class AddToWishList extends TestBase {
 
         Timeless_Grace.click();
         Thread.sleep(2000);
+
+        log.info("WeddingCollection Jewelery Added to WishList Successfully");
 
         WishList.click();
 

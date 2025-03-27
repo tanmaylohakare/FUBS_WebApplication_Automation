@@ -4,6 +4,8 @@ import com.Pages.AddToCart;
 import com.Pages.AddToWishList;
 import com.Pages.LoginPage;
 import com.TestBase.TestBase;
+import org.apache.log4j.Logger;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,6 +16,9 @@ public class WishListTest extends TestBase {
 
     public LoginPage loginPage;
     public AddToWishList wishList;
+
+    Logger log = Logger.getLogger(WishListTest.class);
+
 
     public WishListTest()
     {
@@ -34,6 +39,14 @@ public class WishListTest extends TestBase {
     public void WishListTest1() throws InterruptedException {
         loginPage.Login(prop.getProperty("email"), prop.getProperty("password"));
         wishList.AddToWishListM();
+        log.info("Jewelery Added to WishList Successfully");
+
+    }
+    @AfterMethod
+    public void teardown()
+    {
+        driver.close();
+
     }
 
 }
